@@ -1,0 +1,37 @@
+{
+  "name": "shortly-deploy",
+  "version": "0.0.1",
+  "description": "Learn all about deployment",
+  "main": "server.js",
+  "repository": "",
+  "license": "Proprietary",
+  "private": true,
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "1.0.8",
+    "bookshelf": "^0.9.1",
+    "chai": "^1.9.0",
+    "ejs": "~0.8.5",
+    "eslint-config-hackreactor": "git://github.com/hackreactor-labs/eslint-config-hackreactor",
+    "express": "~3.4.8",
+    "express-partials": "~0.2.0",
+    "forever": "^0.10.11",
+    "grunt": "^0.4.4",
+    "grunt-contrib-concat": "^0.3.0",
+    "grunt-contrib-cssmin": "^0.9.0",
+    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-eslint": "^17.3.1",
+    "grunt-mocha-test": "^0.10.0",
+    "grunt-nodemon": "^0.2.1",
+    "grunt-shell": "^0.6.4",
+    "knex": "^0.9.0",
+    "mocha": "^1.17.1",
+    "mongoose": "~3.8.8",
+    "request": "^2.34.0",
+    "sqlite3": "~3.0.10"
+  },
+  "devDependencies": {
+    "supertest": "^0.10.0"
+  }
+}
