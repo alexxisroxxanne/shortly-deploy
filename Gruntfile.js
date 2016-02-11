@@ -2,27 +2,9 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    // concat: {
-    //   options: {
-    //     // define a string to put between each file in the concatenated output
-    //     separator: ''
-    //   },
-    //   dist: {
-    //     // the files to concatenate
-    //     src: [
-    //       './public/lib/jquery.js',
-    //       './public/lib/underscore.js',
-    //       './public/lib/backbone.js',
-    //       './public/lib/handlebars.js',
-    //       './public/client/*.js'],
-    //     // the location of the resulting JS file
-    //     dest: 'public/dist/<%= pkg.name %>.js'
-    //   }
-    // },
 
     concat: {
       options: {
-        // define a string to put between each file in the concatenated output
         separator: ''
       },
       deps: {
@@ -115,7 +97,6 @@ module.exports = function(grunt) {
     gitpush: {
       target: {
         options: {
-          cwd: './',
           remote: 'live',
           branch: 'master'
         }
@@ -145,14 +126,6 @@ module.exports = function(grunt) {
 
     grunt.task.run([ 'watch' ]);
   });
-
-
-  // grunt.registerTask('upload', function(n) {
-  //   if (grunt.option('prod')) {
-  //     // add your production server task here
-  //   }
-  //   grunt.task.run([ 'server-dev' ]);
-  // });
 
   ////////////////////////////////////////////////////
   // Main grunt tasks
