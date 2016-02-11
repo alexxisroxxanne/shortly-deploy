@@ -147,18 +147,17 @@ module.exports = function(grunt) {
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
-      // add your production server task here
+      grunt.task.run(['gitpush']);
     } else {
-      grunt.task.run([ 'server-dev' ]);
+      grunt.task.run([ 'nodemon', 'watch' ]);
     }
   });
 
   grunt.registerTask('deploy', [
-    // add your deploy tasks here
     'eslint',
     'build',
     'test',
-    'nodemon' // change to 'server-dev' or 'upload'?
+    'upload'
   ]);
 
 
