@@ -2,21 +2,43 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    // concat: {
+    //   options: {
+    //     // define a string to put between each file in the concatenated output
+    //     separator: ''
+    //   },
+    //   dist: {
+    //     // the files to concatenate
+    //     src: [
+    //       './public/lib/jquery.js',
+    //       './public/lib/underscore.js',
+    //       './public/lib/backbone.js',
+    //       './public/lib/handlebars.js',
+    //       './public/client/*.js'],
+    //     // the location of the resulting JS file
+    //     dest: 'public/dist/<%= pkg.name %>.js'
+    //   }
+    // },
+
     concat: {
       options: {
         // define a string to put between each file in the concatenated output
-        separator: ';'
+        separator: ''
       },
-      dist: {
+      deps: {
         // the files to concatenate
         src: [
           './public/lib/jquery.js',
           './public/lib/underscore.js',
           './public/lib/backbone.js',
-          './public/lib/handlebars.js',
-          './public/client/*.js'],
+          './public/lib/handlebars.js'
+          ],
         // the location of the resulting JS file
-        dest: 'public/dist/<%= pkg.name %>.js'
+        dest: 'public/dist/<%= pkg.name %>-deps.js'
+      },
+      cust: {
+        src: ['./public/client/*.js'],
+        dest: 'public/dist/<%= pkg.name %>-cust.js'
       }
     },
 
@@ -40,9 +62,14 @@ module.exports = function(grunt) {
           // the banner is inserted at the top of the output
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
         },
-        dist: {
+        deps: {
           files: {
-            'public/dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+            'public/dist/<%= pkg.name %>-deps.min.js': ['<%= concat.deps.dest %>']
+          }
+        },
+        cust: {
+          files: {
+            'public/dist/<%= pkg.name %>-cust.min.js': ['<%= concat.cust.dest %>']
           }
         }
     },
@@ -54,12 +81,12 @@ module.exports = function(grunt) {
         './server.js',
         './server-config.js',
         './app/**/*.js',
-        './lib/*.js',
         './test/*.js'
       ]
     },
 
     cssmin: {
+      // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!  :)
     },
 
     watch: {
@@ -120,6 +147,7 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
+    'eslint',
     'mochaTest'
   ]);
 
@@ -138,6 +166,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'build',
+    'nodemon', // change to 'server-dev' or 'upload'?
+    'test'
   ]);
 
 
