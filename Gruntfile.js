@@ -9,9 +9,14 @@ module.exports = function(grunt) {
       },
       dist: {
         // the files to concatenate
-        src: ['./**/*.js'],
+        src: [
+          './public/lib/jquery.js',
+          './public/lib/underscore.js',
+          './public/lib/backbone.js',
+          './public/lib/handlebars.js',
+          './public/client/*.js'],
         // the location of the resulting JS file
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'public/dist/<%= pkg.name %>.js'
       }
     },
 
@@ -37,7 +42,7 @@ module.exports = function(grunt) {
         },
         dist: {
           files: {
-            'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+            'public/dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
           }
         }
     },
@@ -119,6 +124,8 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'concat',
+    'uglify'
   ]);
 
   grunt.registerTask('upload', function(n) {
