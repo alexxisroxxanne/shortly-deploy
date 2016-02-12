@@ -43,12 +43,13 @@ userSchema.methods.initialize = function() {
 };
 
 userSchema.pre('save', function(next) {
-  this.hashPassword();
-  next();
+  this.hashPassword().then(function() {
+    next();
+  });
 });
 
 userSchema.methods.comparePassword = function(attemptedPassword, callback) {
-  bcrypt.compare(attemptedPassword, this.get('password'), function(err, isMatch) {
+  bcrypt.compare(attemptedPassword, this.password, function(err, isMatch) {
     callback(isMatch);
   });
 };
