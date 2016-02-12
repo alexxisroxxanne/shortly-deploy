@@ -21,6 +21,14 @@ var linkSchema = new Schema({
   timestamps: Date
 });
 
+linkSchema.pre('save', function(next) {
+  var shasum = crypto.createHash('sha1');
+  var copiedUri = this.url;
+  shasum.update(copiedUri);
+  this.code = shasum.digest('hex').slice(0, 5);
+  next();
+});
+
 
 var userSchema = new Schema({
   id: ObjectId,
